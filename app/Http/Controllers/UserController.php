@@ -21,20 +21,33 @@ class UserController extends Controller
         return response()->json([
             'ok' => true,
             'msg' => 'User got successfully',
-            'user' => User::find($user->id)->with(['getHobbies'])->get(),
+            'user' => User::where('id',$user->id)->with(['getHobbies'])->first(),
         ],200);
     }
 
     public function update(Request $request) {
-        $rules = [
-            'fullname' => 'required|min:1|max:200',
-        ];
+        $user_id = Auth::user()->id;
+        if(!$user_id){
+            return response()->json([
+                'ok' => false,
+                'msg' => 'Not allowed',
+            ],400);
+        }
 
-        $message = [
-            'required' => 'The :attribute field is required.',
-        ];
+        $user = User::where('id', $user_id)->first();
+        if($request->fullname){
+            $validator = Validator::make($request->all(),[
+                'fullname' => 'required|min:1|max:200',
+            ]);
+            $user->fullname = $request->fullname;
+        }
 
-        $validator = Validator::make($request->all(),$rules, $message);
+        if($request->biography){
+            $validator = Validator::make($request->all(),[
+                'biography' => 'min:1|max:2000',
+            ]);
+            $user->biography = $request->biography;
+        }
 
         if($validator->fails()){
             return response()->json([
@@ -43,11 +56,6 @@ class UserController extends Controller
                 'errors' => $validator->errors()
             ],400);
         }
-
-        $user_id = Auth::user()->id;
-        $user = User::where('id', $user_id)->first();
-        $user->fullname = $request->fullname;
-        $user->biography = $request->biography;
 
         if(!$user->save()){
             return response()->json([
@@ -59,7 +67,7 @@ class UserController extends Controller
         return response()->json([
             'ok' => true,
             'msg' => 'User updated successfully',
-            'user' => $user->with(['getHobbies'])->get(),
+            'user' => $user->with(['getHobbies'])->where('id',$user_id)->first(),
         ],200);
 
     }
