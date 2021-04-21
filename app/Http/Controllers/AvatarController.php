@@ -12,12 +12,13 @@ class AvatarController extends Controller
 {
     public function store(Request $request)
     {
+        // return $request->file('file');
         $user = Auth::user();
 
         if(!$request->hasFile('file')){
             return response()->json([
-                'ok' => true,
-                'msg' => 'I dont have file',
+                'ok' => false,
+                'msg' => 'No file found',
             ],400);
         }
 

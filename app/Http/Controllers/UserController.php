@@ -72,7 +72,7 @@ class UserController extends Controller
 
     }
 
-    public function destroy(Request $request, $id) {
+    public function destroy(Request $request) {
         $user_id = Auth::user()->id;
         $user = User::where('id',$user_id)->first();
         if(!$user){

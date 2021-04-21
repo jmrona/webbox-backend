@@ -118,6 +118,7 @@ class HobbyController extends Controller
         return response()->json([
             'ok' => true,
             'msg' => 'Hobby deleted successfully',
+            'hobbies' => Hobby::where('user_id', Auth::user()->id)->get(),
         ],200);
     }
 }
