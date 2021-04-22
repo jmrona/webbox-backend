@@ -12,7 +12,7 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.9",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.6"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -20,6 +20,7 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "nunomaduro/larastan": "^0.7.4",
         "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {

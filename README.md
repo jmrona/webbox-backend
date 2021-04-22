@@ -20,7 +20,12 @@ Open your terminal, make sure that you are in the app directory and type the nex
 Your server address is [http://localhost:8000](http://localhost:8000).
 
 ## How it is work
-Once you have the server running, follow the [Protest-test-frontend](https://github.com/jmrona/protected-test-frontend) instruction and when you see the login screen, use the `username: protected` and `password: protected` to sign in to the app
+Once you have the server running, follow the [Protest-test-frontend](https://github.com/jmrona/protected-test-frontend) instruction and when you see the login screen, use the `email: admin@admin.com` and `password: admin123` to sign in to the app
+
+## More commands
+To download a csv document with all users of the database use the command below:
+#### `php artisan get:users`
+
 ## Learn more
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
